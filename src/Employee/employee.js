@@ -34,34 +34,58 @@ const Employee = () => {
     confirmPassword: ""
   };
 
-  const { values, setFormData } = useForm({ formData, formValue });
+  const { values, handleChange } = useForm({ formData, formValue });
   return (
     <div className="employee-form">
       <Form>
         <Form.Group controlId="formBasicName">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Name" />
+          <Form.Control
+            type="text"
+            placeholder="Name"
+            name="fullName"
+            value={values.fullName}
+            onChange={handleChange}
+          />
           {/* <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text> */}
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Email" />
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+          />
           {/* <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text> */}
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={values.password}
+            onChange={handleChange}
+          />
           {/* <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text> */}
         </Form.Group>
         <Form.Group controlId="formBasicConfirmPassword">
           <Form.Label>Confirm Password</Form.Label>
-          <Form.Control type="password" placeholder="Confirm password" />
+          <Form.Control
+            type="password"
+            placeholder="Confirm password"
+            name="confirmPasword"
+            value={values.confirmPasword}
+            onChange={handleChange}
+          />
           {/* <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text> */}
