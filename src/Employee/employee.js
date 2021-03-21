@@ -12,8 +12,7 @@ const Employee = () => {
     email: {
       validators: {
         required: true,
-        pattern:
-          '/^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/'
+        pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
       }
     },
     password: {
@@ -28,13 +27,14 @@ const Employee = () => {
     }
   };
   const formValue = {
-    fullName: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: ""
   };
 
-  const { values, handleChange } = useForm({ formData, formValue });
+  const [values, errors, handleChange] = useForm({ formData, formValue });
+  console.log("values = ", values);
   return (
     <div className="employee-form">
       <Form>
@@ -43,13 +43,13 @@ const Employee = () => {
           <Form.Control
             type="text"
             placeholder="Name"
-            name="fullName"
-            value={values.fullName}
+            name="name"
+            value={values.name}
             onChange={handleChange}
           />
-          {/* <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text> */}
+          <Form.Text className="text-muted">
+            {errors.name && errors.errorMessage}
+          </Form.Text>
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -60,9 +60,9 @@ const Employee = () => {
             value={values.email}
             onChange={handleChange}
           />
-          {/* <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text> */}
+          <Form.Text className="text-muted">
+            {errors.email && errors.errorMessage}
+          </Form.Text>
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
@@ -82,15 +82,17 @@ const Employee = () => {
           <Form.Control
             type="password"
             placeholder="Confirm password"
-            name="confirmPasword"
-            value={values.confirmPasword}
+            name="confirmPassword"
+            value={values.confirmPassword}
             onChange={handleChange}
           />
-          {/* <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text> */}
+          <Form.Text className="text-muted">
+            {errors.confirmPassword && errors.errorMessage}
+          </Form.Text>
         </Form.Group>
-        <Button variant="primary">Submit</Button>{" "}
+        <Button disabled={errors.isInValidForm} variant="primary">
+          Submit
+        </Button>{" "}
       </Form>
     </div>
   );
